@@ -56,4 +56,16 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+    z-index: 2;
+  }
+
+  .grid div.coin {
+    background-image: url('../assets/871304-middle.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+
+  .wall {
+    background-color: blue;
   }
