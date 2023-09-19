@@ -27,12 +27,28 @@ function init() {
         373, 374, 375, 376, 377, 377, 320, 340, 360, 380, 400, 39, 59, 79,
         99, 119, 139, 159, 179, 199, 219, 239, 259, 279, 299, 319, 339, 359,
         379, 399, 419, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411,
-        412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238];
+        412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238, 188, 191];
+    const winner =  document.querySelector('h5');
+    let score = 0;
+    let scoreboard = document.getElementById('scoreboard');
+    let lives = document.getElementById('lives')
+    let lifeCount = 3
+    const ghostsNextMove = ['up', 'down', 'left', 'right']
     
+    
+
 
     //CHARACTER CONFIG
     const startingPosition = 229
     let currentPosition = 229
+    const rStartingPosition = 169
+    const bStartingPosition = 189 
+    const pStartingPosition = 190 
+    const oStartingPosition = 170
+    let rCurrentPosition = 189
+    let bCurrentPosition = 189
+    let pCurrentPosition = 190
+    let oCurrentPosition = 190
 
     //! FUNCTIONS
 
@@ -45,10 +61,11 @@ function init() {
 
         //? Map and create class walls
 
-        walls.forEach((wall) => {
+        walls.map((wall) => {
             if (wall === i)
                 cell.classList.add('wall')
         })
+
 
         // Add index to div element
         // cell.innerText = i
@@ -70,15 +87,177 @@ function init() {
         if (!walls.includes(i)){
             const newCoin = document.getElementById(`${i}`)   
                    newCoin.classList.add('coin')
-            console.log(newCoin)
         }
 
     }
 
-    addCoins()
+    gameLost()
 
-    // Add user Character class to starting poitions
+    function gameLost(){
+        if (lifeCount === 0){
+            init()
+        }   
+    }
+    
+
+    
+
+    addCoins()
+    
+    redGhost(rStartingPosition)
+
+    blueGhost(bStartingPosition)
+
+    pinkGhost(pStartingPosition)
+
+    orangeGhost(oStartingPosition)
+
+
+    setInterval(redMoves,250)
+
+    function redMoves() {
+
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        console.log(direction)
+    
+            rRedGhost()
+
+        if (direction === 'right' && walls.includes(rCurrentPosition + 1) === false){
+            rCurrentPosition += 1
+        }else if (direction === 'left' && walls.includes(rCurrentPosition - 1) === false){
+            rCurrentPosition -=1
+        }else if (direction === 'down' && walls.includes(rCurrentPosition + width) === false){
+            rCurrentPosition += width
+        }else if (direction === 'up' && walls.includes(rCurrentPosition - width) === false){
+            rCurrentPosition -= width
+        }
+
+        redGhost(rCurrentPosition)
+
+        if ((cells[rCurrentPosition].classList.contains('pac'))) {
+            lifeCount--
+            lives.innerHTML = (`lives: ${lifeCount}`)
+        }
+    }
+    setInterval(blueMoves,250)
+
+    function blueMoves() {
+
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        console.log(direction)
+    
+            rBlueGhost()
+
+        if (direction === 'right' && walls.includes(bCurrentPosition + 1) === false){
+            bCurrentPosition += 1
+        }else if (direction === 'left' && walls.includes(bCurrentPosition - 1) === false){
+            bCurrentPosition -=1
+        }else if (direction === 'down' && walls.includes(bCurrentPosition + width) === false){
+            bCurrentPosition += width
+        }else if (direction === 'up' && walls.includes(bCurrentPosition - width) === false){
+            bCurrentPosition -= width
+        }
+
+        blueGhost(bCurrentPosition)
+
+        if ((cells[bCurrentPosition].classList.contains('pac'))) {
+            lifeCount--
+            lives.innerHTML = (`lives: ${lifeCount}`)
+        }
+    }
+    setInterval(pinkMoves,250)
+
+    function pinkMoves() {
+
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        console.log(direction)
+    
+            rPinkGhost()
+
+        if (direction === 'right' && walls.includes(pCurrentPosition + 1) === false){
+            pCurrentPosition += 1
+        }else if (direction === 'left' && walls.includes(pCurrentPosition - 1) === false){
+            pCurrentPosition -=1
+        }else if (direction === 'down' && walls.includes(pCurrentPosition + width) === false){
+            pCurrentPosition += width
+        }else if (direction === 'up' && walls.includes(pCurrentPosition - width) === false){
+            pCurrentPosition -= width
+        }
+
+        pinkGhost(pCurrentPosition)
+
+        if ((cells[pCurrentPosition].classList.contains('pac'))) {
+            lifeCount--
+            lives.innerHTML = (`lives: ${lifeCount}`)
+        }
+    }
+    setInterval(orangeMoves,250)
+
+    function orangeMoves() {
+
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        console.log(direction)
+    
+            rOrangeGhost()
+
+        if (direction === 'right' && walls.includes(oCurrentPosition + 1) === false){
+            oCurrentPosition += 1
+        }else if (direction === 'left' && walls.includes(oCurrentPosition - 1) === false){
+            oCurrentPosition -=1
+        }else if (direction === 'down' && walls.includes(oCurrentPosition + width) === false){
+            oCurrentPosition += width
+        }else if (direction === 'up' && walls.includes(oCurrentPosition - width) === false){
+            oCurrentPosition -= width
+        }
+
+        orangeGhost(oCurrentPosition)
+
+        if ((cells[oCurrentPosition].classList.contains('pac'))) {
+            lifeCount--
+            lives.innerHTML = (`lives: ${lifeCount}`)
+        }
+    }
+
+ 
+
+    // Add ghosts to cells
+
+    
+
+    function redGhost(position) {
+        cells[position].classList.add('rGhost')
+    }
+
+    function rRedGhost() {
+        cells[rCurrentPosition].classList.remove('rGhost')
+    }
+
+    function blueGhost(position) {
+        cells[position].classList.add('bGhost')
+    }
+
+    function rBlueGhost() {
+        cells[bCurrentPosition].classList.remove('bGhost')
+    }
+    function pinkGhost(position) {
+        cells[position].classList.add('pGhost')
+    }
+
+    function rPinkGhost() {
+        cells[pCurrentPosition].classList.remove('pGhost')
+    }
+    function orangeGhost(position) {
+        cells[position].classList.add('oGhost')
+    }
+
+    function rOrangeGhost() {
+        cells[oCurrentPosition].classList.remove('oGhost')
+    }
+
+
+     // Add user Character class to starting poitions
     addPac(startingPosition)
+    
 
 
     // Add Pac class
@@ -134,19 +313,38 @@ function init() {
             coinRemove()
 
             // how many miliseconds interval between movement
-        }, 500)
+        }, 50)
+
+        gameWon()
+ 
+        function gameWon(){
+        if (score === 194){
+            winner.innerHTML = (`congratulations you Won!`)
+        }
+    }
 
     }
 
      // remove coin after pacman has entered the cell
     function coinRemove(){
-     const coinCell = document.getElementById(currentPosition)
-     if (coinCell.classList.contains('coin')){
-         coinCell.classList.remove('coin')
+     const pacCell = document.getElementById(currentPosition)
+     if (pacCell.classList.contains('coin')){
+         pacCell.classList.remove('coin')
+         score++
+         scoreboard.innerHTML = (`you score: ${score}`)
      }
     }
- 
+
+
+  
+
+  
+   
     
+    
+
+
+
 
     
 
