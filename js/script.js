@@ -1,5 +1,5 @@
-function init() {
 
+function init() {
     //! ELEMENTS
     //CREATE GRID
     const grid = document.querySelector('.grid');
@@ -18,7 +18,7 @@ function init() {
         110, 114, 120, 121, 122, 123, 125, 126, 127, 129, 130, 132, 133,
         134, 136, 137, 138, 140, 143, 145, 154, 156, 160, 161, 162, 163,
         165, 167, 168, 171, 172, 174, 176, 177, 178, 180, 187, 192, 200,
-        201, 202, 203, 205, 207, 208, 209, 210, 211, 212, 214, 216, 217,
+        201, 202, 203, 205, 207, 208, 211, 212, 214, 216, 217,
         218, 220, 223, 225, 234, 236, 240, 241, 242, 243, 245, 247, 248,
         249, 250, 251, 252, 254, 256, 257, 258, 260, 269, 270, 280, 282,
         283, 285, 286, 287, 289, 290, 292, 293, 294, 296, 297, 300, 303,
@@ -27,30 +27,51 @@ function init() {
         373, 374, 375, 376, 377, 377, 320, 340, 360, 380, 400, 39, 59, 79,
         99, 119, 139, 159, 179, 199, 219, 239, 259, 279, 299, 319, 339, 359,
         379, 399, 419, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411,
-        412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238, 188, 191];
-    const winner =  document.querySelector('h5');
+        412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238, 188, 191, 209, 210, 169, 170];
+    const winner = document.querySelector('#winnerS');
     let score = 0;
     let scoreboard = document.getElementById('scoreboard');
     let lives = document.getElementById('lives')
-    let lifeCount = 3
+    let lifeCount = 3;
     const ghostsNextMove = ['up', 'down', 'left', 'right']
-    
-    
-
+    const tryAgainBtn = document.getElementById('tryAgainBtn')
+    lives.innerHTML = (`Lives: ${lifeCount}`)
+    scoreboard.innerHTML = (`Your score: ${score}`)
 
     //CHARACTER CONFIG
     const startingPosition = 229
-    let currentPosition = 229
-    const rStartingPosition = 169
-    const bStartingPosition = 189 
-    const pStartingPosition = 190 
-    const oStartingPosition = 170
+    let currentPosition = startingPosition;
+    const rStartingPosition = 189
+    const bStartingPosition = 189
+    const pStartingPosition = 190
+    const oStartingPosition = 190
     let rCurrentPosition = 189
     let bCurrentPosition = 189
     let pCurrentPosition = 190
     let oCurrentPosition = 190
 
     //! FUNCTIONS
+
+    function loseGame(lifeCount) {
+        if (lifeCount === 0) {
+            console.log('hell')
+            clearInterval(redMovesId)
+            clearInterval(blueMovesId)
+            clearInterval(pinkMovesId)
+            clearInterval(orangeMovesId)
+            clearInterval(timer)
+            tryAgainBtn.style.display = 'block';
+            resetPacMan();
+        }
+
+    }
+
+    function resetPacMan() {
+        removePac(); // Remove Pac class from the current position
+        currentPosition = startingPosition; // Reset current position to the starting position
+        addPac(currentPosition);
+    }
+
 
     //? CREATE GRID CELLS
 
@@ -80,184 +101,182 @@ function init() {
         // Ddd newly created div cells to our cells array
         cells.push(cell)
     }
-    
-    function addCoins(){
+
+    function addCoins() {
         const coins = []
         for (let i = 0; i < cells.length; i++)
-        if (!walls.includes(i)){
-            const newCoin = document.getElementById(`${i}`)   
-                   newCoin.classList.add('coin')
-        }
+            if (!walls.includes(i)) {
+                const newCoin = document.getElementById(`${i}`)
+                newCoin.classList.add('coin')
+            }
 
     }
-
-    gameLost()
-
-    function gameLost(){
-        if (lifeCount === 0){
-            init()
-        }   
-    }
-    
-
-    
 
     addCoins()
-    
+
+    //?Ghosts
+
+    //Ghosts starting Positions
     redGhost(rStartingPosition)
-
     blueGhost(bStartingPosition)
-
     pinkGhost(pStartingPosition)
-
     orangeGhost(oStartingPosition)
 
+    let redMovesId
+    redMovesId = setInterval(redMoves, 250)
 
-    setInterval(redMoves,250)
+    //Ghosts random direction generators whithin the walla
+
+    // function GhostMovement(){
 
     function redMoves() {
 
-        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)]
         console.log(direction)
-    
-            rRedGhost()
 
-        if (direction === 'right' && walls.includes(rCurrentPosition + 1) === false){
+        rRedGhost()
+
+        if (direction === 'right' && walls.includes(rCurrentPosition + 1) === false) {
             rCurrentPosition += 1
-        }else if (direction === 'left' && walls.includes(rCurrentPosition - 1) === false){
-            rCurrentPosition -=1
-        }else if (direction === 'down' && walls.includes(rCurrentPosition + width) === false){
+        } else if (direction === 'left' && walls.includes(rCurrentPosition - 1) === false) {
+            rCurrentPosition -= 1
+        } else if (direction === 'down' && walls.includes(rCurrentPosition + width) === false) {
             rCurrentPosition += width
-        }else if (direction === 'up' && walls.includes(rCurrentPosition - width) === false){
+        } else if (direction === 'up' && walls.includes(rCurrentPosition - width) === false) {
             rCurrentPosition -= width
         }
 
         redGhost(rCurrentPosition)
 
         if ((cells[rCurrentPosition].classList.contains('pac'))) {
+            resetPacMan();
             lifeCount--
+            loseGame(lifeCount)
             lives.innerHTML = (`lives: ${lifeCount}`)
+
         }
     }
-    setInterval(blueMoves,250)
+    let blueMovesId
+    blueMovesId = setInterval(blueMoves, 250)
 
     function blueMoves() {
 
-        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)]
         console.log(direction)
-    
-            rBlueGhost()
 
-        if (direction === 'right' && walls.includes(bCurrentPosition + 1) === false){
+        rBlueGhost()
+
+        if (direction === 'right' && walls.includes(bCurrentPosition + 1) === false) {
             bCurrentPosition += 1
-        }else if (direction === 'left' && walls.includes(bCurrentPosition - 1) === false){
-            bCurrentPosition -=1
-        }else if (direction === 'down' && walls.includes(bCurrentPosition + width) === false){
+        } else if (direction === 'left' && walls.includes(bCurrentPosition - 1) === false) {
+            bCurrentPosition -= 1
+        } else if (direction === 'down' && walls.includes(bCurrentPosition + width) === false) {
             bCurrentPosition += width
-        }else if (direction === 'up' && walls.includes(bCurrentPosition - width) === false){
+        } else if (direction === 'up' && walls.includes(bCurrentPosition - width) === false) {
             bCurrentPosition -= width
         }
 
         blueGhost(bCurrentPosition)
 
         if ((cells[bCurrentPosition].classList.contains('pac'))) {
+            resetPacMan();
             lifeCount--
+            loseGame(lifeCount)
             lives.innerHTML = (`lives: ${lifeCount}`)
+
         }
     }
-    setInterval(pinkMoves,250)
+    let pinkMovesId
+    pinkMovesId = setInterval(pinkMoves, 250)
 
     function pinkMoves() {
 
-        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)]
         console.log(direction)
-    
-            rPinkGhost()
 
-        if (direction === 'right' && walls.includes(pCurrentPosition + 1) === false){
+        rPinkGhost()
+
+        if (direction === 'right' && walls.includes(pCurrentPosition + 1) === false) {
             pCurrentPosition += 1
-        }else if (direction === 'left' && walls.includes(pCurrentPosition - 1) === false){
-            pCurrentPosition -=1
-        }else if (direction === 'down' && walls.includes(pCurrentPosition + width) === false){
+        } else if (direction === 'left' && walls.includes(pCurrentPosition - 1) === false) {
+            pCurrentPosition -= 1
+        } else if (direction === 'down' && walls.includes(pCurrentPosition + width) === false) {
             pCurrentPosition += width
-        }else if (direction === 'up' && walls.includes(pCurrentPosition - width) === false){
+        } else if (direction === 'up' && walls.includes(pCurrentPosition - width) === false) {
             pCurrentPosition -= width
         }
 
         pinkGhost(pCurrentPosition)
 
         if ((cells[pCurrentPosition].classList.contains('pac'))) {
+            resetPacMan();
             lifeCount--
+            loseGame(lifeCount)
             lives.innerHTML = (`lives: ${lifeCount}`)
+
         }
     }
-    setInterval(orangeMoves,250)
+    let orangeMovesId
+    orangeMovesId = setInterval(orangeMoves, 250)
 
     function orangeMoves() {
 
-        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)] 
+        let direction = ghostsNextMove[Math.floor(Math.random() * ghostsNextMove.length)]
         console.log(direction)
-    
-            rOrangeGhost()
 
-        if (direction === 'right' && walls.includes(oCurrentPosition + 1) === false){
+        rOrangeGhost()
+
+        if (direction === 'right' && walls.includes(oCurrentPosition + 1) === false) {
             oCurrentPosition += 1
-        }else if (direction === 'left' && walls.includes(oCurrentPosition - 1) === false){
-            oCurrentPosition -=1
-        }else if (direction === 'down' && walls.includes(oCurrentPosition + width) === false){
+        } else if (direction === 'left' && walls.includes(oCurrentPosition - 1) === false) {
+            oCurrentPosition -= 1
+        } else if (direction === 'down' && walls.includes(oCurrentPosition + width) === false) {
             oCurrentPosition += width
-        }else if (direction === 'up' && walls.includes(oCurrentPosition - width) === false){
+        } else if (direction === 'up' && walls.includes(oCurrentPosition - width) === false) {
             oCurrentPosition -= width
         }
 
         orangeGhost(oCurrentPosition)
 
         if ((cells[oCurrentPosition].classList.contains('pac'))) {
+            resetPacMan();
             lifeCount--
+            loseGame(lifeCount)
             lives.innerHTML = (`lives: ${lifeCount}`)
+
         }
     }
 
- 
 
     // Add ghosts to cells
-
-    
-
     function redGhost(position) {
         cells[position].classList.add('rGhost')
     }
-
     function rRedGhost() {
         cells[rCurrentPosition].classList.remove('rGhost')
     }
-
     function blueGhost(position) {
         cells[position].classList.add('bGhost')
     }
-
     function rBlueGhost() {
         cells[bCurrentPosition].classList.remove('bGhost')
     }
     function pinkGhost(position) {
         cells[position].classList.add('pGhost')
     }
-
     function rPinkGhost() {
         cells[pCurrentPosition].classList.remove('pGhost')
     }
     function orangeGhost(position) {
         cells[position].classList.add('oGhost')
     }
-
     function rOrangeGhost() {
         cells[oCurrentPosition].classList.remove('oGhost')
     }
 
 
-     // Add user Character class to starting poitions
+    // Add user Character class to starting poitions
     addPac(startingPosition)
-    
 
 
     // Add Pac class
@@ -274,10 +293,10 @@ function init() {
 
     function handleDirection(event) {
         const key = event.keyCode
-        const up = 38
-        const down = 40
-        const left = 37
-        const right = 39
+        const up = 87
+        const down = 83
+        const left = 65
+        const right = 68
 
         // Clear timer interval so moving in one direction at a time
         clearInterval(timer)
@@ -304,51 +323,73 @@ function init() {
                 console.log('INVALID KEY')
 
             }
+            if (currentPosition === 228 || currentPosition === 230) {
+                removeBar()
+            }
 
             //Add Pac class once currentPostion has been updated 
             addPac(currentPosition)
 
-             // remove coin after pacman has entered the cell
-
+            // remove coin after pacman has entered the cell
             coinRemove()
 
             // how many miliseconds interval between movement
-        }, 50)
+        }, 200)
 
-        gameWon()
- 
-        function gameWon(){
-        if (score === 194){
-            winner.innerHTML = (`congratulations you Won!`)
+        function removeBar() {
+            const index1 = walls.indexOf(169);
+            const index2 = walls.indexOf(170);
+            if (index1 !== -1) {
+                walls.splice(index1, 1); // Remove the element at index1
+            }
+            if (index2 !== -1) {
+                walls.splice(index2, 1); // Remove the element at index2
+            }
+        }
+    // remove coin after pacman has entered the cell
+    function coinRemove() {
+        const pacCell = document.getElementById(currentPosition)
+        if (pacCell.classList.contains('coin')) {
+            pacCell.classList.remove('coin')
+            score += 10
+            scoreboard.innerHTML = (`your score: ${score}`)
+            gameWon()
         }
     }
 
+      //Game won function
+      function gameWon() {
+        if (score === 1900) {
+            tryAgainBtn.innerHTML = ('To play again click here!')
+            clearInterval(redMovesId)
+            clearInterval(blueMovesId)
+            clearInterval(pinkMovesId)
+            clearInterval(orangeMovesId)
+            clearInterval(timer)
+            resetPacMan()
+            winner.innerHTML = (`Congratulations you Won!`)
+            tryAgainBtn.style.display = 'block';
+            winner.style.display = 'block';
+        }
     }
-
-     // remove coin after pacman has entered the cell
-    function coinRemove(){
-     const pacCell = document.getElementById(currentPosition)
-     if (pacCell.classList.contains('coin')){
-         pacCell.classList.remove('coin')
-         score++
-         scoreboard.innerHTML = (`you score: ${score}`)
-     }
-    }
-
-
-  
-
-  
-   
-    
-    
+}
 
 
 
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -360,10 +401,10 @@ function init() {
 
     //! EVENTS
     document.addEventListener('keyup', handleDirection)
-
-
-
-
+    tryAgainBtn.addEventListener('click', () => {
+        // reload the page
+        location.reload();
+    });
 
 
 

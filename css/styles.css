@@ -1,105 +1,213 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    height: 100vh;
-    margin: 0;
-  }
-  header{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  box-sizing: border-box;
+}
 
-  h1{
-    display: flex;
-    justify-content: center;
-    border: 0.1vmin solid black;
-    border-style: groove;
-  }
+body {
+  height: 100vh;
+  margin: 0;
+}
 
-  .grid-wrapper {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .grid {
-    margin-top: -10vmin;
-    align-items: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: center;
-    height: 700px;
-    width: 700px;
-  }
-  
-  .grid div {
-    border: 1px solid lightgrey;
-    flex-grow: 1;
-    height: 10%;
-    width: 10%;
-  }
+header {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  background-color: #000; /* Black background */
+}
 
-  .grid div.pac {
-    background-image: url('../assets/pac-man-Icon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    z-index: 2;
-  }
+h1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 36px;
+  color: #ffcc00; /* Retro yellow text color */
+  text-shadow: 2px 2px 4px #ff0033; /* Red text shadow */
+  text-transform: uppercase; /* Uppercase text */
+  font-family: 'Press Start 2P', cursive; /* Retro font */
+  margin: 20px 0;
+}
 
-  .grid div.coin {
-    background-image: url('../assets/871304-middle.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-  }
+div#score-live {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20vmin;
+  text-align: center;
+  font-size: 36px;
+  background-color: #000;
+}
 
-  .grid div.rGhost {
-    background-image: url('../assets/red-ghost-icon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  .grid div.bGhost {
-    background-image: url('../assets/blue-ghost-icon.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  .grid div.pGhost {
-    background-image: url('../assets/pink-ghost-icon.jpeg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  .grid div.oGhost {
-    background-image: url('../assets/orange-ghost-icons.jpeg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    z-index: 2;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .wall {
-    background-color: blue;
-  }
+div#scoreboard {
+  background-color: #ffcc00; /* Retro yellow background */
+  color: #ff0033; /* Red text color */
+  font-size: 24px;
+  padding: 10px 20px;
+  border: 2px solid #ff0033; /* Red border */
+  border-radius: 5px;
+  text-transform: uppercase; /* Uppercase text */
+  font-family: 'Courier New', monospace; /* Retro font */
+  margin: 10px 0;
+}
+
+div#scoreboard :hover{
+  background-color: #ff0033; /* Red background on hover */
+  color: #ffcc00;
+}
+div#lives {
+  background-color: #ffcc00; 
+  color: #ff0033; 
+  font-size: 24px;
+  padding: 10px 20px;
+  border: 2px solid #ff0033; 
+  border-radius: 5px;
+  text-transform: uppercase; 
+  font-family: 'Courier New', monospace; 
+  margin: 10px 0;
+}
+div#lives :hover{
+  background-color: #ff0033; 
+  color: #ffcc00;
+}
+
+div.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.grid-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; 
+  background-repeat: repeat; 
+  background-size: 100px 100px
+}
+
+.grid {
+  margin-top: -10vmin;
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 700px;
+  width: 700px;
+}
+
+.grid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+}
+
+.grid div.pac {
+  background-image: url('../assets/pac-man-Icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.grid div.coin {
+  background-image: url('../assets/coin-pacmna.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.grid div.rGhost {
+  background-image: url('../assets/red-ghost-icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.grid div.bGhost {
+  background-image: url('../assets/b03.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.grid div.pGhost {
+  background-image: url('../assets/pink02.jpeg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.grid div.oGhost {
+  background-image: url('../assets/pac-man-ghost-orange.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  z-index: 2;
+}
+
+button {
+  display: none;
+  background-color: #ffcc00;
+  color: #ff0033;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: 2px solid #ff0033;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+button:hover {
+  background-color: #ff0033; 
+  color: #ffcc00;
+}
+div#winner{
+  padding: -10vmin;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20vmin;
+  text-align: center;
+  font-size: 36px;
+  background-color: #000;
+ 
+}
+#winnerS {
+  display: none;
+  background-color: #ffcc00; /* Retro yellow background */
+  color: #ff0033; /* Red text color */
+  font-size: 24px;
+  padding: 10px 20px;
+  border: 2px solid #ff0033; /* Red border */
+  border-radius: 5px;
+  text-transform: uppercase; /* Uppercase text */
+  font-family: 'Courier New', monospace; /* Retro font */
+  margin: 10px 0;
+}
+
+div#madeBy {
+  background-color: #000;
+  text-align: center;
+  color: #ffcc00;
+}
+
+
+
+
+
+
+
+
+.wall {
+  background-color: blue;
+}
