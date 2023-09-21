@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Victor+Mono:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Victor+Mono:wght@100&display=swap"
+    rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Pac-Man Game</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
-    <audio autoplay>
-        <source src="./audio/gameOverNoise.mp3">
-    </audio> 
-    <header>
-        <h1>Pac-Man</h1>
-    </header>
-    <div id="score-live">
-    <div id="scoreboard"></div>
-    <div id="lives"></div>
-    </div>  
-    <div class="buttonContainer">
+    <div id="buttonContainer">
+        <audio autoplay>
+            <source src="./audio/gameOverNoise.mp3">
+        </audio>
+        <header>
+            <h1 id="title">Pac-Man</h1>
+        </header>
+        <div id="score-live">
+            <div id="scoreboard"></div>
+            <div id="lives"></div>
+        </div>
         <button id="tryAgainBtn">Press here to Try again!</button>
+        <main class="grid-wrapper">
+            <section class="grid"></section>
+        </main>
+        <div id="winner">
+            <h5 id="winnerS"></h5>
+        </div>
+        <div class="container">
+            <h1 id="bA">BackGround Audio</h1>
+            <div class="btns">
+                <button type="button" id="playBtn" class="btn btn-success">Play</button>
+                <button type="button" id="pauseBtn" class="btn btn-warning">Pause</button>
+                <button type="button" id="stopBtn" class="btn btn-danger">Stop</button>
+            </div>
+            <div class="slider">
+                <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1">
+            </div>
+        </div>
+        <style></style>
+        <div id="madeBy">
+            <footer>Made by Elliot Lewis</footer>
+        </div>
     </div>
-    <main class="grid-wrapper">
-        <section class="grid"></section>
-    </main>
-    <div id="winner">
-        <h5 id="winnerS"></h5>
-    </div>
-    <div id="madeBy">
-    <footer>Made by Elliot Lewis</footer>
-    </div>  
     <script src="./js/script.js"></script>
 </body>
+
 </html>

@@ -6,24 +6,67 @@ body {
   height: 100vh;
   margin: 0;
 }
+div.container{
+  margin-top: 5vmin;
+}
 
-header {
+#bA{
+  font-size: 2.5vmin ;
+  color: #ffcc00;
+  text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive;
+  justify-content: center;
+  text-align: center;
+}
+
+
+div.btns {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  background-color: #000; /* Black background */
+}
+#playBtn {
+  justify-content: space-around;
+  padding: 0.2vmin; 
+  width: 6vmin;
+  height: 3vmin;
+}
+#pauseBtn {
+  justify-content: space-around;
+  padding: 0.2vmin;
+  width: 6vmin;
+  height: 3vmin;
+}
+#stopBtn {
+  justify-content: space-around;
+  padding: 0.2vmin;
+  width: 6vmin;
+  height: 3vmin;
+}
+div.slider {
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
+
+header {
+  display: flex;
+  margin-bottom: -4vmin;
+  flex-wrap: nowrap;
+  justify-content: center;
+  background-color: #000;
+}
+
+h1#title {
   display: flex;
   justify-content: center;
   text-align: center;
-  font-size: 36px;
-  color: #ffcc00; /* Retro yellow text color */
-  text-shadow: 2px 2px 4px #ff0033; /* Red text shadow */
-  text-transform: uppercase; /* Uppercase text */
-  font-family: 'Press Start 2P', cursive; /* Retro font */
-  margin: 20px 0;
+  font-size: 6vmin; 
+  color: #ffcc00;
+  text-shadow: 2vmin 2vmin 4vmin #ff0033; 
+  text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive;
+  margin: 4vmin 0;
 }
 
 div#score-live {
@@ -31,78 +74,80 @@ div#score-live {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 20vmin;
+  gap: 4vmin;
   text-align: center;
-  font-size: 36px;
+  font-size: 3vmin;
   background-color: #000;
+  margin-bottom: 2vmin;
 }
 
 div#scoreboard {
-  background-color: #ffcc00; /* Retro yellow background */
-  color: #ff0033; /* Red text color */
-  font-size: 24px;
-  padding: 10px 20px;
-  border: 2px solid #ff0033; /* Red border */
-  border-radius: 5px;
-  text-transform: uppercase; /* Uppercase text */
-  font-family: 'Courier New', monospace; /* Retro font */
-  margin: 10px 0;
+  background-color: #ffcc00;
+  color: #ff0033;
+  font-size: 3vmin;
+  padding: 1vmin 2vmin;
+  border: 0.2vmin solid #ff0033;
+  border-radius: 2vmin;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  margin: 2vmin 0;
 }
 
-div#scoreboard :hover{
-  background-color: #ff0033; /* Red background on hover */
+div#scoreboard:hover {
+  background-color: #ff0033;
   color: #ffcc00;
 }
+
 div#lives {
-  background-color: #ffcc00; 
-  color: #ff0033; 
-  font-size: 24px;
-  padding: 10px 20px;
-  border: 2px solid #ff0033; 
-  border-radius: 5px;
-  text-transform: uppercase; 
-  font-family: 'Courier New', monospace; 
-  margin: 10px 0;
+  background-color: #ffcc00;
+  color: #ff0033;
+  font-size: 3vmin;
+  padding: 1vmin 2vmin;
+  border: 0.2vmin solid #ff0033;
+  border-radius: 2vmin;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  margin: 2vmin 0;
 }
-div#lives :hover{
-  background-color: #ff0033; 
+
+div#lives:hover {
+  background-color: #ff0033;
   color: #ffcc00;
 }
 
-div.buttonContainer {
+div#buttonContainer {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #000;
 }
 
 .grid-wrapper {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000; 
-  background-repeat: repeat; 
-  background-size: 100px 100px
+  height: 70vmin;
+  width: 70vmin;
+  background-color: #000;
+
 }
 
 .grid {
-  margin-top: -10vmin;
+  position: relative;
   align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2vmin 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
+  height: 100%; 
+  width: 100%; 
   justify-content: center;
-  height: 700px;
-  width: 700px;
+  box-shadow: #090677;
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  border: 0.2vmin solid lightgrey;
   flex-grow: 1;
-  height: 10%;
-  width: 10%;
+  height: 8vmin; 
+  width: 8vmin; 
 }
 
 .grid div.pac {
@@ -112,6 +157,39 @@ div.buttonContainer {
   cursor: pointer;
   z-index: 2;
 }
+.grid div.pac-up {
+  background-image: url('../assets/pac-man-Icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transform: rotate(270deg);
+  z-index: 2;
+}
+.grid div.pac-right {
+  background-image: url('../assets/pac-man-Icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transform: rotate(0deg);
+  z-index: 2;
+}
+.grid div.pac-down {
+  background-image: url('../assets/pac-man-Icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transform: rotate(90deg);
+  z-index: 2;
+}
+.grid div.pac-left {
+  background-image: url('../assets/pac-man-Icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+   transform: scaleX(-1);
+  z-index: 2;
+}
+
 
 .grid div.coin {
   background-image: url('../assets/coin-pacmna.webp');
@@ -121,7 +199,7 @@ div.buttonContainer {
   z-index: 1;
 }
 
-.grid div.rGhost {
+.grid div.red {
   background-image: url('../assets/red-ghost-icon.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -129,15 +207,15 @@ div.buttonContainer {
   z-index: 2;
 }
 
-.grid div.bGhost {
-  background-image: url('../assets/b03.png');
+.grid div.blue {
+  background-image: url('../assets/blue06.jpeg');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
   z-index: 2;
 }
 
-.grid div.pGhost {
+.grid div.pink {
   background-image: url('../assets/pink02.jpeg');
   background-repeat: no-repeat;
   background-size: contain;
@@ -145,7 +223,7 @@ div.buttonContainer {
   z-index: 2;
 }
 
-.grid div.oGhost {
+.grid div.orange {
   background-image: url('../assets/pac-man-ghost-orange.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -154,59 +232,68 @@ div.buttonContainer {
 }
 
 button {
+  margin-bottom: 4vmin;
   display: none;
+  position: relative;
   background-color: #ffcc00;
   color: #ff0033;
-  font-size: 18px;
-  padding: 10px 20px;
-  border: 2px solid #ff0033;
-  border-radius: 5px;
+  font-size: 3vmin; 
+  padding: 2vmin 4vmin; 
+  border: 0.2vmin solid #ff0033;
+  border-radius: 2vmin;
   text-transform: uppercase;
   font-family: 'Courier New', monospace;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  z-index: 2;
+  animation: pulse 1s infinite alternate;
 }
+
 button:hover {
-  background-color: #ff0033; 
+  background-color: #ff0033;
   color: #ffcc00;
 }
-div#winner{
-  padding: -10vmin;
+
+@keyframes pulse {
+  0% {
+  transform: scale(1);
+}
+100% {
+  transform: scale(1.1);
+}
+}
+
+div#winner {
+  padding: -2vmin;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 20vmin;
+  gap: 4vmin;
   text-align: center;
-  font-size: 36px;
+  font-size: 6vmin;
   background-color: #000;
- 
 }
+
 #winnerS {
   display: none;
-  background-color: #ffcc00; /* Retro yellow background */
-  color: #ff0033; /* Red text color */
-  font-size: 24px;
-  padding: 10px 20px;
-  border: 2px solid #ff0033; /* Red border */
-  border-radius: 5px;
-  text-transform: uppercase; /* Uppercase text */
-  font-family: 'Courier New', monospace; /* Retro font */
-  margin: 10px 0;
+  background-color: #ffcc00;
+  color: #ff0033;
+  font-size: 4vmin;
+  padding: 2vmin 4vmin;
+  border: 0.2vmin solid #ff0033;
+  border-radius: 2vmin;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  margin: 2vmin 0;
 }
 
 div#madeBy {
+  margin-top: 5vmin;
   background-color: #000;
   text-align: center;
   color: #ffcc00;
 }
-
-
-
-
-
-
-
 
 .wall {
   background-color: blue;
