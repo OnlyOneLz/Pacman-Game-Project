@@ -1,6 +1,5 @@
 
 function init() {
-
   // CONSTS
   const width = 20
   const height = 21
@@ -25,6 +24,7 @@ function init() {
     379, 399, 419, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411,
     412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238, 188, 191, 209, 210, 169, 170];
   const myAudio = new Audio("./audio/PacMan.mp3");
+  const gameOverAudio = new Audio ("./audio/gameOverNoise.mp3")
   // ELEMENTS
   const winner = document.querySelector('#winnerS');
   let scoreboard = document.getElementById('scoreboard');
@@ -32,7 +32,6 @@ function init() {
   const tryAgainBtn = document.getElementById('tryAgainBtn')
   const grid = document.querySelector('.grid');
   const buttonContainer = document.getElementById('buttonContainer');
-  const gameOverAudio = document.getElementById('gameOverAudio');
   const backgroundAudio = document.getElementById('backgroundAudio');
 
   // LETS
@@ -48,8 +47,6 @@ function init() {
   scoreboard.innerHTML = (`Your score: ${score}`)
 
   // HELPER FUNCTIONS
-  
-
   document.getElementById('playBtn').addEventListener('click', () => {
     myAudio.play();
   })
@@ -64,20 +61,24 @@ function init() {
     myAudio.volume = volumeSlider.value;
   })
 
-  function playGameOverAudio() {
-    gameOverAudio.play();
-  }
-
   function loseGame(lifeCount) {
     if (lifeCount === 0) {
-      console.log('hell')
       clearIntervalAllGhostMoves();
       clearInterval(timer);
       tryAgainBtn.style.display = 'flex';
       buttonContainer.style.justifyContent = 'center'
-      playGameOverAudio();
       resetPacMan();
+      myAudio.pause()
     }
+  }
+
+  function resetGhosts() {
+    ghosts.forEach(ghost => {
+      removeGhost(ghost.name)
+        ghost.currentPos = ghost.startingPos;
+        // Reset the ghost's position 
+        addGhost(ghost.name, ghost.currentPos);
+    });
   }
 
   function resetPacMan() {
@@ -109,10 +110,10 @@ function init() {
 
   // Define an array of ghost objects
   const ghosts = [
-    { name: 'red', currentPos: 189 },
-    { name: 'blue', currentPos: 189 },
-    { name: 'pink', currentPos: 190 },
-    { name: 'orange', currentPos: 190 }
+    { name: 'red', startingPos:189, currentPos: 189 },
+    { name: 'blue', startingPos:189, currentPos: 189 },
+    { name: 'pink', startingPos:190, currentPos: 190 },
+    { name: 'orange', startingPos:190, currentPos: 190 }
   ];
 
   // Initialize ghost movements
@@ -148,15 +149,17 @@ function init() {
     // Check if the ghost touches Pac-Man
     if (cells[ghost.currentPos].classList.contains('pac', 'pac-up', 'pac-down', 'pac-right', 'pac-left')) {
       resetPacMan();
+      resetGhosts();
       lifeCount--;
-      loseGame(lifeCount);
       lives.innerHTML = `Lives: ${lifeCount}`;
+      loseGame(lifeCount);
+      gameOverAudio.play()
     }
   }
 
   // Start ghost movements
   ghosts.forEach(ghost => {
-    const intervalId = setInterval(() => moveGhost(ghost), 300);
+    const intervalId = setInterval(() => moveGhost(ghost), 200);
     ghostMoveIntervals.push(intervalId);
   });
 
@@ -236,8 +239,8 @@ function init() {
     // Add the corresponding direction class
     cells[currentPosition].classList.add(`pac-${direction}`);
   }
-  // Handle direction
 
+  // Handle direction
   function handleDirection(event) {
     const key = event.keyCode
     const up = 87
@@ -273,13 +276,19 @@ function init() {
       } else { }
       if (currentPosition === 198) {
         currentPosition = 181;
-        key = right
       } else if (currentPosition === 181) {
         currentPosition = 198;
-        key = left
       }
       if (currentPosition === 228 || currentPosition === 230) {
         removeBar()
+      }
+      if (cells[currentPosition].classList.contains('ghostName')){
+        resetPacMan();
+        resetGhosts();
+        lifeCount--;
+        lives.innerHTML = `Lives: ${lifeCount}`;
+        loseGame(lifeCount);
+        gameOverAudio.play()
       }
 
       //Add Pac class once currentPostion has been updated 
@@ -293,7 +302,7 @@ function init() {
       // how many miliseconds interval between movement
     }, 200)
 
-    myAudio.play();
+    
 
     function removeBar() {
       const index1 = walls.indexOf(169);

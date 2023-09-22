@@ -44,8 +44,9 @@ div.btns {
   height: 3vmin;
 }
 div.slider {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
 }
 
 
@@ -291,6 +292,8 @@ div#winner {
 div#madeBy {
   margin-top: 5vmin;
   background-color: #000;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
   text-align: center;
   color: #ffcc00;
 }
