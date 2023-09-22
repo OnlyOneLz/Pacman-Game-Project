@@ -16,9 +16,9 @@
 
 <body>
     <div id="buttonContainer">
-        <audio id="gameOverAudio">
-            <source src="./audio/gameOverNoise.mp3">
-        </audio>
+        <audio autoplay>
+            <source >
+        </audio> 
         <header>
             <h1 id="title">Pac-Man</h1>
         </header>
@@ -26,7 +26,7 @@
             <div id="scoreboard"></div>
             <div id="lives"></div>
         </div>
-        <button id="tryAgainBtn">Press here to Try again!</button>
+        <button id="tryAgainBtn">You Lose! Press here to Try again!</button>
         <main class="grid-wrapper">
             <section class="grid"></section>
         </main>
@@ -34,7 +34,7 @@
             <h5 id="winnerS"></h5>
         </div>
         <div class="container">
-            <h1 id="bA">Background Audio</h1>
+            <h1 id="bA">Background Music</h1>
             <div class="btns">
                 <button type="button" id="playBtn" class="btn btn-success">Play</button>
                 <button type="button" id="pauseBtn" class="btn btn-warning">Pause</button>
