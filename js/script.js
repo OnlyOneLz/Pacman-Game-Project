@@ -25,6 +25,7 @@ function init() {
     412, 413, 414, 415, 416, 417, 418, 141, 142, 157, 158, 221, 222, 237, 238, 188, 191, 209, 210, 169, 170];
   const myAudio = new Audio("./audio/PacMan.mp3");
   const gameOverAudio = new Audio ("./audio/gameOverNoise.mp3")
+ 
   // ELEMENTS
   const winner = document.querySelector('#winnerS');
   let scoreboard = document.getElementById('scoreboard');
@@ -159,7 +160,7 @@ function init() {
 
   // Start ghost movements
   ghosts.forEach(ghost => {
-    const intervalId = setInterval(() => moveGhost(ghost), 200);
+    const intervalId = setInterval(() => moveGhost(ghost), 100);
     ghostMoveIntervals.push(intervalId);
   });
 
