@@ -304,21 +304,40 @@ div#madeBy {
 
 div.controls {
   display: flex !important;
-  /* align-items: flex-start !important;
-  justify-content: flex-start !important; */
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column;
   text-align: center;
   color: #ffcc00;
-  background-color: #ff0000;
-  margin-right: 40vh;
-  margin-top: -40vh;
+  background-color: #000000;
 }
 
 img.control {
-  width: 4vh;
-  height: 4vh;
+  margin-top: -50vh;
+  margin-left: -130vh;
+  width: 30vh;
+  height: 30vh;
 }
 
 p.control-text {
-  font-size: 4vh;
-  font-family: 'Courier New', monospace;
+  margin-left: -130vh;
+  text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 6vh;
+}
+
+@media (max-width: 1150px) {
+  img.control {
+    margin-top: 0vh;
+    margin-left: 0vh;
+    width: 15vh;
+    height: 15vh;
+  }
+  
+  p.control-text {
+    margin-left: 0vh;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 4vh;
+  }
 }
