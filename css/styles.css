@@ -304,13 +304,21 @@ div#madeBy {
 
 div.controls {
   display: flex !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
+  /* align-items: flex-start !important;
+  justify-content: flex-start !important; */
   text-align: center;
   color: #ffcc00;
   background-color: #ff0000;
-  margin-right: 20vh;
-  margin-top: -20vh;
-  height: 4vh;
+  margin-right: 40vh;
+  margin-top: -40vh;
+}
+
+img.control {
   width: 4vh;
+  height: 4vh;
+}
+
+p.control-text {
+  font-size: 4vh;
+  font-family: 'Courier New', monospace;
 }
