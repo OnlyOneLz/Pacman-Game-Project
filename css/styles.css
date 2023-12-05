@@ -303,9 +303,9 @@ div#madeBy {
 }
 
 div#controls {
-  display: flex;
+  /* display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: flex-start; */
   text-align: center;
   color: #ffcc00;
   background-color: #ff0000;
