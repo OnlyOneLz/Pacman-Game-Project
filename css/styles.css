@@ -302,10 +302,10 @@ div#madeBy {
   background-color: blue;
 }
 
-div#controls {
-  /* display: flex;
-  align-items: flex-start;
-  justify-content: flex-start; */
+div.controls {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
   text-align: center;
   color: #ffcc00;
   background-color: #ff0000;
