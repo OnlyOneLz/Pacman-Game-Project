@@ -301,3 +301,11 @@ div#madeBy {
 .wall {
   background-color: blue;
 }
+
+.controls {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #000;
+  height: 10vh;
+  width: 10vh;
+}
